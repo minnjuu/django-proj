@@ -25,7 +25,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="pull-right">
-                                    <a href="{% url 'organization-add' %}" class="btn btn-success btn-rounded">Add Organization</a>
+                                    <a href="{% url 'program-add' %}" class="btn btn-success btn-rounded">Add Program</a>
                                 </div>
                             </div>
                         </div>
@@ -33,20 +33,18 @@
                         <table class="table table-striped mt-3">
                             <thead>
                                 <tr>
-                                    <th scope="col">Name</th>
+                                    <th scope="col">Program Name</th>
                                     <th scope="col">College</th>
-                                    <th scope="col">Description</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for object in object_list %}
                                 <tr>
-                                    <td>{{ object.name }}</td>
+                                    <td>{{ object.prog_name }}</td>
                                     <td>{{ object.college }}</td>
-                                    <td>{{ object.description }}</td>
-                                    <td><a href="organization_list/{{ object.id }}">Edit</a></td>
-                                    <td><a href="organization_list/{{ object.id }}/delete" class="text-danger">Delete</a></td>
+                                    <td><a href="program_list/{{ object.id }}">Edit</a></td>
+                                    <td><a href="program_list/{{ object.id }}/delete" class="text-danger">Delete</a></td>
                                 </tr>
                                 {% empty %}
                                 <tr>
