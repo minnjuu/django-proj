@@ -7,6 +7,10 @@ from django.urls import reverse_lazy
 from typing import Any
 from django.db.models.query import QuerySet
 from django.db.models import Q
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+@method_decorator(login_required, name='dispatch')
 
 class HomePageView(ListView):
     model = Organization
@@ -49,6 +53,14 @@ class CollegeList(ListView):
     context_object_name = 'college'
     template_name = "college_list.html"
     paginate_by = 5
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super(CollegeList, self).get_queryset(*args, **kwargs)
+        if self.request.GET.get("q") != None:
+            query = self.request.GET.get('q')
+            qs = qs.filter(Q(name__icontains=query) |
+            Q(description__icontains=query))
+        return qs
 
 class CollegeCreateView(CreateView):
     model = College
