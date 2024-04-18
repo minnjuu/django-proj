@@ -34,7 +34,7 @@ class StudentForm(ModelForm):
         }
 
 class OrgMemForm(ModelForm):
-    widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
+    widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
     class Meta:
         model = OrgMember
         fields = "__all__"
