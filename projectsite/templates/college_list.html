@@ -7,14 +7,14 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">List of Colleges</div>
-                        <div class="card-category">Page Subtitle</div>
+                        <div class="card-category">PalSU Beloved Colleges</div>
                     </div>
                     <br>
                         <div class="col-md-12 row">
                             <div class="col-md-6">
-                                <form action="" class="navbar-left navbar-form nav-search mr-md-3" action="">
+                                <form action="" class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'college-list' %}">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Search ..." class="form-control">
+                                        <input type="text" placeholder="Search ..." class="form-control" name="q">
                                         <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="la la-search search-icon"></i>

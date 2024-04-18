@@ -15,7 +15,7 @@
 		<div class="main-header">
 			<div class="logo-header">
 				<a href="index.html" class="logo">
-					Ready Dashboard
+					PSUSphere Dashboard
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -111,7 +111,7 @@
 										<div class="u-img"><img src="{% static '/img/profile.jpg' %}" alt="user"></div>
 										<div class="u-text">
 											<h4>Hizrian</h4>
-											<p class="text-muted">hello@themekita.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+											<p class="text-muted">hello@themekita.com</p><a href="profile.html" class="btn btn-rounded btn-sm">View Profile</a></div>
 										</div>
 									</li>
 									<div class="dropdown-divider"></div>
@@ -121,7 +121,11 @@
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#"><i class="ti-settings"></i> Account Setting</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logout</a>
+									<form method="post" action="{% url 'logout' %}">
+										{% csrf_token %}
+										<button type="submit" class="btn btn-rounded btn-danger">Logout</button>
+									</form>									
+									<!-- <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logout</a> -->
 								</ul>
 								<!-- /.dropdown-user -->
 							</li>
