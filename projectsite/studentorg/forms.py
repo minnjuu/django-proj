@@ -34,7 +34,6 @@ class StudentForm(ModelForm):
         }
 
 class OrgMemForm(ModelForm):
-    date_joined = forms.DateField(label="Birthdate",
     widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
     class Meta:
         model = OrgMember

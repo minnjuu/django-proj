@@ -122,7 +122,7 @@ class OrgMemList(ListView):
             query = self.request.GET.get('q')
             qs = qs.filter(Q(student__lastname__icontains=query) |
             Q(student__firstname__icontains=query) | 
-            Q(date_joined__icontains=query) | Q(organizatio__name__icontains=query))
+            Q(date_joined__icontains=query) | Q(organization__name__icontains=query))
         return qs
 
 class OrgMemCreateView(CreateView):
