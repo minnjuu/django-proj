@@ -9,6 +9,8 @@ from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from django.http import JsonResponse
 
 @method_decorator(login_required, name='dispatch')
 
@@ -172,6 +174,56 @@ class ProgramDeleteView(DeleteView):
     model = Program
     template_name = "program_del.html"
     success_url = reverse_lazy('program-list')
+
+class ChartView(ListView):
+    template_name = 'charts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        pass
+
+
+def bar_chart_data(request):
+    programs = Program.objects.all()
+    data = {
+        'labels': [program.prog_name for program in programs],
+        'data': [program.student_set.count() for program in programs]
+    }
+    return JsonResponse(data)
+
+def radar_chart_data(request):
+    programs = Program.objects.all()
+    data = {
+        'labels': [program.prog_name for program in programs],
+        'data': [program.student_set.count() for program in programs]
+    }
+    return JsonResponse(data)
+
+def polar_area_chart_data(request):
+    colleges = College.objects.all()
+    data = {
+        'labels': [college.college_name for college in colleges],
+        'data': [college.organization_set.count() for college in colleges]
+    }
+    return JsonResponse(data)
+
+def doughnut_chart_data(request):
+    organizations = Organization.objects.annotate(num_members=Count('orgmember'))
+    data = {
+        'labels': [org.name for org in organizations],
+        'data': [org.num_members for org in organizations]
+    }
+    return JsonResponse(data)
+
+def bubble_chart_data(request):
+    programs = Program.objects.all()
+    data = {
+        'data': [{'x': i, 'y': program.student_set.count(), 'r': program.student_set.count() / 10} for i, program in enumerate(programs)]
+    }
+    return JsonResponse(data)
 
 
 

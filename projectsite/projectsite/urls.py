@@ -21,6 +21,7 @@ from studentorg import views
 from django.contrib.auth import views as auth_views
 from django.urls import path, re_path
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomePageView.as_view(), name='home'),
@@ -46,5 +47,11 @@ urlpatterns = [
     path('program_list/<pk>/delete', ProgramDeleteView.as_view(), name='program-delete'),
     re_path(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     re_path(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
+    path('charts/', ChartView.as_view(), name='chart-view'),
+    path('charts/bar_chart_data/', bar_chart_data, name='bar-chart-data'),
+    path('charts/radar_chart_data/', radar_chart_data, name='radar-chart-data'),
+    path('charts/polar_area_chart_data/', polar_area_chart_data, name='polar-area-chart-data'),
+    path('charts/doughnut_chart_data/', doughnut_chart_data, name='doughnut-chart-data'),
+    path('charts/bubble_chart_data/', bubble_chart_data, name='bubble-chart-data'),
 
 ]

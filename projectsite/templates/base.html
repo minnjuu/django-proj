@@ -208,6 +208,12 @@
 								<span class="badge badge-danger">25</span>
 							</a>
 						</li>
+						<li class="nav-item active">
+							<a href="{% url 'chart-view' %}">
+								<i class="la la-table"></i>
+								<p>Charts</p>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -265,6 +271,10 @@
 			</div>
 		</div>
 	</div>
+
+	{% block chart %}
+
+	{% endblock %}
 </body>
 <script src="{% static 'js/core/jquery.3.2.1.min.js' %}"></script>
 <script src="{% static 'js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
