@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.http import JsonResponse
+from collections import defaultdict
 
 @method_decorator(login_required, name='dispatch')
 
@@ -219,11 +220,22 @@ def doughnut_chart_data(request):
     return JsonResponse(data)
 
 def bubble_chart_data(request):
-    programs = Program.objects.all()
-    data = {
-        'data': [{'x': i, 'y': program.student_set.count(), 'r': program.student_set.count() / 10} for i, program in enumerate(programs)]
-    }
-    return JsonResponse(data)
+    year_count = defaultdict(int)
+    for student in Student.objects.all():
+        year = student.student_id[:4] 
+        year_count[year] += 1
+
+    
+    datasets = []
+    for year, count in year_count.items():
+        datasets.append({
+            "label": f'Year {year}',
+            "data": [{"x": int(year), "y": count, "r": count}], 
+            "backgroundColor": 'rgba(255, 99, 132, 0.6)',
+            "borderColor": 'rgba(255, 99, 132, 1)'
+        })
+
+    return JsonResponse({"datasets": datasets})
 
 
 

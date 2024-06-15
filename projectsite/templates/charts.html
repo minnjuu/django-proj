@@ -136,8 +136,7 @@
                     },
                     plugins: {
                         legend: {
-                        display: true,
-                        position: 'bottom'
+                        display: true
                         }
                     },
                 }
@@ -172,7 +171,7 @@
                         display: true,
                         text: 'College Membership Distribution'
                     }
-                }
+                },
             });
         });
 
@@ -209,29 +208,50 @@
         });
 
     
-    fetch('/charts/bubble_chart_data/')
-        .then(response => response.json())
-        .then(data => {
-            const bubbleCtx = document.getElementById('bubbleChart').getContext('2d');
-            new Chart(bubbleCtx, {
-                type: 'bubble',
-                data: {
-                    datasets: [{
-                        label: 'Student Enrollment Bubble Chart',
-                        data: data.data,
-                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                    }]
-                },
-                options: {
-                    responsive: true,
+        fetch('/charts/bubble_chart_data/')
+    .then(response => response.json())
+    .then(data => {
+        const bubbleCtx = document.getElementById('bubbleChart').getContext('2d');
+        new Chart(bubbleCtx, {
+            type: 'bubble',
+            data: {
+                datasets: data.datasets  
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'  
+                    },
                     title: {
                         display: true,
                         text: 'Student Enrollment Bubble Chart'
                     }
+                },
+                scales: {
+                    x: {
+                        display: false,
+                        title: {
+                            display: false,
+                            text: 'Year'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value.toString();  
+                            }
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Number of Students'
+                        }
+                    }
                 }
-            });
+            }
         });
+    });
 
         
 </script>
